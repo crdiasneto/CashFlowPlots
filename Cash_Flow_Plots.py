@@ -41,7 +41,7 @@ if ticker:  # Check if a ticker was entered
     dividend_per_share = dividend_per_share(cashflow_data, balance_sheet_data)
 
     Cname = yf.Ticker(ticker).info.get('longName', 'Unknown Company Name')
-    st.write(f'Cash Flo and Dividend Per Share for {Cname}')  # Display the text in the Streamlit app
+    st.write(f'Cash Flow and Dividend Per Share for {Cname}')  # Display the text in the Streamlit app
 
 # Plotting using matplotlib and displaying with Streamlit
     # Plotting using matplotlib and displaying with Streamlit
