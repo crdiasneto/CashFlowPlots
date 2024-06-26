@@ -28,6 +28,8 @@ def dividend_per_share(cashflow, balance_sheet):
     if 'Cash Dividends Paid' in cashflow:
         dividend_per_share = (-cashflow.loc[:,'Cash Dividends Paid'])/ balance_sheet.loc[:,'Ordinary Shares Number']
         return dividend_per_share
+    else:
+        return None
 
 # Streamlit app setup
 st.title('Stock Cash Flow and Dividend Per Share Analysis')  # Added a title for the Streamlit app
