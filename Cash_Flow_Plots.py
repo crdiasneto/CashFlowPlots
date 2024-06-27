@@ -78,31 +78,4 @@ if ticker:  # Check if a ticker was entered
     if dividend_per_share is not None:
         ax2.legend(loc='upper right', fontsize=12)
     
-    # Creating the data table
-    table_data = {
-    'Year': cashflow_years,
-    'Cash Flow Per Share': cashflow_per_share.to_numpy().round(2) if isinstance(cashflow_per_share, pd.Series) else cashflow_per_share.round(2),
-}
-    if dividend_per_share is not None:
-    table_data['Dividend Per Share'] = dividend_per_share.to_numpy().round(2) if isinstance(dividend_per_share, pd.Series) else dividend_per_share.round(2)
-
-    df_table = pd.DataFrame(table_data)
-
-    # Add table to the plot on the right side
-    ax_table = fig.add_axes([0.8, 0.1, 0.15, 0.8])  # Adjust the position and size of the table
-    ax_table.axis('tight')
-    ax_table.axis('off')
-    mpl_table = ax_table.table(cellText=df_table.values, colLabels=df_table.columns, cellLoc='center', loc='center')
-    mpl_table.auto_set_font_size(False)
-    mpl_table.set_fontsize(10)
-    mpl_table.scale(1.2, 1.2)
-
-    # Adjust the table to fit the text properly
-    for key, cell in mpl_table.get_celld().items():
-        cell.set_edgecolor('black')
-        cell.set_linewidth(1.0)
-        if key[0] == 0:
-            cell.set_fontsize(12)
-            cell.set_text_props(weight='bold')
-
     st.pyplot(fig)
