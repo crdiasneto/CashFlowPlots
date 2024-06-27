@@ -82,6 +82,6 @@ if ticker:  # Check if a ticker was entered
         st.pyplot(fig)
     
     except Exception as e:
-        st.error(f"Error: {e}. Please enter a valid ticker symbol.")
+        st.error(f"Please enter a valid ticker symbol.")
     
         # I am trying to figure out how to insert a table with the values
