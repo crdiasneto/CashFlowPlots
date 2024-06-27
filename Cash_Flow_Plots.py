@@ -53,7 +53,7 @@ if ticker:  # Check if a ticker was entered
         dividend_years = dividend_per_share.index.year
 
     # Plotting using matplotlib and displaying with Streamlit
-    fig, ax1 = plt.subplots(figsize=(14, 8))
+    fig, ax1 = plt.subplots(figsize=(12, 8))
 
     ax1.set_xlabel('Year', fontsize=14)
     ax1.set_ylabel('Cash Flow Per Share', color='black', fontsize=14)
