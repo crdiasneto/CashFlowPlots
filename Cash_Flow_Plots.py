@@ -56,7 +56,7 @@ if ticker:  # Check if a ticker was entered
     fig, ax1 = plt.subplots(figsize=(12, 8))
 
     ax1.set_xlabel('Year', fontsize=14)
-    ax1.set_ylabel('Cash Flow Per Share', color='tab:blue', fontsize=14)
+    ax1.set_ylabel('Cash Flow Per Share', color='black', fontsize=14)
     ax1.plot(cashflow_years, cashflow_per_share.values, label='Cash Flow Per Share', color='tab:blue',
                  linewidth=2)
     ax1.tick_params(axis='y', labelcolor='black')
