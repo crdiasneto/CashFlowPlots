@@ -46,23 +46,33 @@ if ticker:  # Check if a ticker was entered
     Cname = yf.Ticker(ticker).info.get('longName', 'Unknown Company Name')
     st.write(f'Cash Flow and Dividend Per Share for {Cname}')  # Display the text in the Streamlit app
 
-# Plotting using matplotlib and displaying with Streamlit
-    # Plotting using matplotlib and displaying with Streamlit
-    fig, ax1 = plt.subplots(figsize=(10, 6))
+    # Extracting years for the x-axis
+    cashflow_years = cashflow_per_share.index.year
+    
+    if dividend_per_share is not None:
+        dividend_years = dividend_per_share.index.year
 
-    ax1.set_xlabel('Year')
-    ax1.set_ylabel('Cash Flow Per Share', color='tab:blue')
-    ax1.plot(cashflow_per_share.index, cashflow_per_share.values, label='Cash Flow Per Share',
-             color='tab:blue')
+    # Plotting using matplotlib and displaying with Streamlit
+    fig, ax1 = plt.subplots(figsize=(12, 8))
+
+    ax1.set_xlabel('Year', fontsize=14)
+    ax1.set_ylabel('Cash Flow Per Share', color='tab:blue', fontsize=14)
+    ax1.plot(cashflow_years, cashflow_per_share.values, label='Cash Flow Per Share', color='tab:blue', linewidth=2)
     ax1.tick_params(axis='y', labelcolor='tab:blue')
+    ax1.grid(True, which='both', linestyle='--', linewidth=0.5)
 
     if dividend_per_share is not None:
-        st.write(f'Dividend Per Share for {Cname}')
         ax2 = ax1.twinx()
-        ax2.set_ylabel('Dividend Per Share', color='tab:orange')
-        ax2.plot(dividend_per_share.index, dividend_per_share.values, label='Dividend Per Share',
-                 color='tab:orange')
+        ax2.set_ylabel('Dividend Per Share', color='tab:orange', fontsize=14)
+        ax2.plot(dividend_years, dividend_per_share.values, label='Dividend Per Share', color='tab:orange',
+                 linewidth=2, linestyle='--')
         ax2.tick_params(axis='y', labelcolor='tab:orange')
 
+    # Add title and legends
+    plt.title(f'Cash Flow Per Share and Dividend Per Share for {Cname}', fontsize=16)
     fig.tight_layout()
+    ax1.legend(loc='upper left', fontsize=12)
+    if dividend_per_share is not None:
+        ax2.legend(loc='upper right', fontsize=12)
+
     st.pyplot(fig)
