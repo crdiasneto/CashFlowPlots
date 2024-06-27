@@ -66,7 +66,7 @@ if ticker:  # Check if a ticker was entered
 
     if dividend_per_share is not None:
         ax2 = ax1.twinx()
-        ax2.set_ylabel('Dividend Per Share', color='tab:orange', fontsize=14)
+        ax2.set_ylabel('Dividend Per Share', color='black', fontsize=14)
         ax2.plot(dividend_years, dividend_per_share.values, label='Dividend Per Share', color='tab:orange',
                      linewidth=2, linestyle='--')
         ax2.tick_params(axis='y', labelcolor='black')
