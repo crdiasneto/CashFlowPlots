@@ -57,16 +57,19 @@ if ticker:  # Check if a ticker was entered
 
     ax1.set_xlabel('Year', fontsize=14)
     ax1.set_ylabel('Cash Flow Per Share', color='tab:blue', fontsize=14)
-    ax1.plot(cashflow_years, cashflow_per_share.values, label='Cash Flow Per Share', color='tab:blue', linewidth=2)
-    ax1.tick_params(axis='y', labelcolor='tab:blue')
+    ax1.plot(cashflow_years, cashflow_per_share.values, label='Cash Flow Per Share', color='tab:blue',
+                 linewidth=2)
+    ax1.tick_params(axis='y', labelcolor='black')
     ax1.grid(True, which='both', linestyle='--', linewidth=0.5)
+    ax1.set_xticks(cashflow_years)
+    ax1.set_xticklabels(cashflow_years.astype(int), rotation=45, ha='right')
 
     if dividend_per_share is not None:
         ax2 = ax1.twinx()
         ax2.set_ylabel('Dividend Per Share', color='tab:orange', fontsize=14)
         ax2.plot(dividend_years, dividend_per_share.values, label='Dividend Per Share', color='tab:orange',
-                 linewidth=2, linestyle='--')
-        ax2.tick_params(axis='y', labelcolor='tab:orange')
+                     linewidth=2, linestyle='--')
+        ax2.tick_params(axis='y', labelcolor='black')
 
     # Add title and legends
     plt.title(f'Cash Flow Per Share and Dividend Per Share for {Cname}', fontsize=16)
