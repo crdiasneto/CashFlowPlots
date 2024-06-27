@@ -77,8 +77,8 @@ if ticker:  # Check if a ticker was entered
     ax1.legend(loc='upper left', fontsize=12)
     if dividend_per_share is not None:
         ax2.legend(loc='upper right', fontsize=12)
+        
+    st.pyplot(fig)
 else:
     st.write('This Ticker is not valid!')
     # I am trying to figure out how to insert a table with the values
-        
-    st.pyplot(fig)
