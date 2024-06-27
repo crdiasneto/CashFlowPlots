@@ -81,7 +81,7 @@ if ticker:  # Check if a ticker was entered
     # Creating the data table
     table_data = {
     'Year': cashflow_years,
-    'Cash Flow Per Share': cashflow_per_share.to_numpy().round(2) if isinstance(cashflow_per_share, pd.Series) else cashflow_per_share.round(2)
+    'Cash Flow Per Share': cashflow_per_share.to_numpy().round(2) if isinstance(cashflow_per_share, pd.Series) else cashflow_per_share.round(2),
 }
     if dividend_per_share is not None:
     table_data['Dividend Per Share'] = dividend_per_share.to_numpy().round(2) if isinstance(dividend_per_share, pd.Series) else dividend_per_share.round(2)
