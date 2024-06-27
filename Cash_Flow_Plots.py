@@ -30,6 +30,7 @@ def dividend_per_share(cashflow, balance_sheet):
         return dividend_per_share
     else:
         return None
+    #I need to find a way for the plots to work if a company does not pay any dividends
 
 # Streamlit app setup
 st.title('Stock Cash Flow and Dividend Per Share Analysis')  # Added a title for the Streamlit app
@@ -55,11 +56,13 @@ if ticker:  # Check if a ticker was entered
              color='tab:blue')
     ax1.tick_params(axis='y', labelcolor='tab:blue')
 
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Dividend Per Share', color='tab:orange')
-    ax2.plot(dividend_per_share.index, dividend_per_share.values, label='Dividend Per Share',
-             color='tab:orange')
-    ax2.tick_params(axis='y', labelcolor='tab:orange')
+    if dividend_per_share_data is not None:
+        st.write(f'Dividend Per Share for {Cname}')
+        ax2 = ax1.twinx()
+        ax2.set_ylabel('Dividend Per Share', color='tab:orange')
+        ax2.plot(dividend_per_share_data.index, dividend_per_share_data.values, label='Dividend Per Share',
+                 color='tab:orange')
+        ax2.tick_params(axis='y', labelcolor='tab:orange')
 
     fig.tight_layout()
     st.pyplot(fig)
