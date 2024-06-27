@@ -53,7 +53,7 @@ if ticker:  # Check if a ticker was entered
         dividend_years = dividend_per_share.index.year
 
     # Plotting using matplotlib and displaying with Streamlit
-    fig, ax1 = plt.subplots(figsize=(12, 8))
+    fig, ax1 = plt.subplots(figsize=(14, 8))
 
     ax1.set_xlabel('Year', fontsize=14)
     ax1.set_ylabel('Cash Flow Per Share', color='black', fontsize=14)
@@ -77,5 +77,24 @@ if ticker:  # Check if a ticker was entered
     ax1.legend(loc='upper left', fontsize=12)
     if dividend_per_share is not None:
         ax2.legend(loc='upper right', fontsize=12)
+    
+    # Creating the data table
+    table_data = {
+            'Year': cashflow_years,
+            'Cash Flow Per Share': cashflow_per_share.values
+        }
+    if dividend_per_share is not None:
+        table_data['Dividend Per Share'] = dividend_per_share.values
+
+    df_table = pd.DataFrame(table_data)
+
+    # Add table to the plot
+    ax_table = fig.add_axes([0.75, 0.1, 0.2, 0.8])  # Adjust the position and size of the table
+    ax_table.axis('tight')
+    ax_table.axis('off')
+    mpl_table = ax_table.table(cellText=df_table.values, colLabels=df_table.columns, cellLoc='center', loc='center')
+    mpl_table.auto_set_font_size(False)
+    mpl_table.set_fontsize(10)
+    mpl_table.scale(1.2, 1.2)
 
     st.pyplot(fig)
