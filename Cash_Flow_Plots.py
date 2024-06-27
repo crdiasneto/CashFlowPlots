@@ -79,6 +79,5 @@ if ticker:  # Check if a ticker was entered
         ax2.legend(loc='upper right', fontsize=12)
         
     st.pyplot(fig)
-else:
-    st.write('This Ticker is not valid!')
+
     # I am trying to figure out how to insert a table with the values
