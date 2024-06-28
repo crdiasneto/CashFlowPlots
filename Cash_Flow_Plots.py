@@ -47,7 +47,7 @@ def dividend_per_share(cashflow, balance_sheet):
         return None
 
 def eps(financial):
-    eps = financial['Basic EPS']
+    eps = financial['Diluted EPS']
     return eps
 
 # Streamlit app setup
