@@ -85,17 +85,23 @@ if ticker:  # Check if a ticker was entered
         ax1.set_xticklabels(cashflow_years.astype(int), rotation=45, ha='right')
     
         ax2 = ax1.twinx()
-        ax2.set_ylabel('Dividend Per Share and EPS', color='black', fontsize=14)
+        ax2.set_ylabel('Dividend Per Share', color='black', fontsize=14)
         if dividend_per_share is not None:
             ax2.plot(dividend_years, dividend_per_share.values, label='Dividend Per Share', color='tab:orange', linewidth=2, linestyle='--')
-        ax2.plot(eps_years, eps_data.values, label='EPS', color='tab:green', linewidth=2, linestyle='-.')
         ax2.tick_params(axis='y', labelcolor='black')
-    
+        
+        ax3 = ax1.twinx()
+        ax3.spines['right'].set_position(('outward', 60))
+        ax3.set_ylabel('EPS', color='black', fontsize=14)
+        ax3.plot(eps_years, eps_data.values, label='EPS', color='tab:green', linewidth=2, linestyle='-.')
+        ax3.tick_params(axis='y', labelcolor='black')
+
         plt.title(f'Cash Flow Per Share, Dividend Per Share, and EPS for {Cname}', fontsize=16)
         fig.tight_layout()
         ax1.legend(loc='upper left', fontsize=12)
         if dividend_per_share is not None:
-            ax2.legend(loc='upper right', fontsize=12)
+            ax2.legend(loc='upper center', fontsize=12)
+        ax3.legend(loc='upper right', fontsize=12)
     
         st.pyplot(fig)
     
