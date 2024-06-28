@@ -20,7 +20,22 @@ def balance_sheet(ticker):
     return balance_sheet
 
 def process_cashflow(cashflow, balance_sheet, financial):
-    cashflow_per_share = (financial.loc[:, 'Net Income'] + cashflow.loc[:,'Depreciation And Amortization']) / balance_sheet.loc[:,'Ordinary Shares Number']
+    # Get 'Depreciation And Amortization' column, fill NaN values with zero
+    da = cashflow.get('Depreciation And Amortization', pd.Series(0, index=cashflow.index))
+    da.fillna(0, inplace=True)
+
+    # Get 'Depreciation Amortization Depletion' column, fill NaN values with zero
+    dad = cashflow.get('Depreciation Amortization Depletion', pd.Series(0, index=cashflow.index))
+    dad.fillna(0, inplace=True)
+
+    # Use DAD only if DA is zero
+    depreciation_amortization = da.where(da != 0, dad)
+
+    # Calculate adjusted net income
+    adjusted_net_income = financial['Net Income'] + depreciation_amortization
+
+    # Calculate cash flow per share
+    cashflow_per_share = adjusted_net_income / balance_sheet['Ordinary Shares Number']
 
     return cashflow_per_share
 
